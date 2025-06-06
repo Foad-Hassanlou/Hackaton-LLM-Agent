@@ -1,0 +1,20 @@
+# Core dependencies
+PyQt5==5.15.9
+pygame==2.5.2
+numpy==1.26.4
+pandas==2.2.1
+python-dotenv==1.0.1
+sounddevice==0.4.6
+wave==0.0.2
+
+# Speech recognition and audio processing
+SpeechRecognition==3.10.0
+pyaudio==0.2.14
+
+# OpenAI and AI-related packages
+openai==1.12.0
+chromadb==0.4.22
+autogen==0.2.14
+
+# Additional utilities
+python-getpass==1.0.0
