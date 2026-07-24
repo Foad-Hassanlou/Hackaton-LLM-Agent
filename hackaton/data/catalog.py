@@ -11,7 +11,7 @@ from hackaton import config
 class ProductCatalog:
     """The product dataset, parsed once and shared by the UI and the search index.
 
-    ``final_data.csv`` holds one column per category, each cell being a
+    ``data/final_data.csv`` holds one column per category, each cell being a
     stringified Python dict describing a single advertisement. This class
     converts those cells back into dicts and exposes one flat DataFrame per
     category.

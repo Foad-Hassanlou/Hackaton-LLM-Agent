@@ -2,6 +2,8 @@
 
 This desktop application, developed with PyQt5, enables voice-driven product search in Persian. It combines speech recognition, text-to-speech (TTS), and intelligent AI processing to allow users to search for products like cars, laptops, and mobile phones using spoken commands. Results are displayed in a user-friendly interface and can be read aloud using TTS.
 
+> **Note:** This project was built for a hackathon, under a 24-hour time limit. It was written to be demoed at the competition, not to be a production-grade reference — so the code is not necessarily the most optimal or the most correct approach, and parts of it reflect decisions made under time pressure rather than careful design.
+
 ## Key Features
 
 - **Voice Recognition**: Captures and transcribes Persian speech using the `SpeechRecognition` library.
@@ -62,6 +64,13 @@ hackaton/
     main_window.py              # VoiceRecorder window
     windows.py                  # graph / data table / QR code pop-ups
     styles.py                   # Qt stylesheets
+data/
+  final_data.csv                # the product dataset
+assets/
+  graph.png                     # pipeline diagram shown by "Show Graph"
+  QRCode.png                    # QR code shown next to each answer
+docs/
+  demo.mp4                      # screen recording of the app
 ```
 
 ### How a query flows
@@ -70,4 +79,4 @@ hackaton/
 
 ## Data
 
-`final_data.csv` holds one column per category (`ماشین`, `لپ تاپ`, `تلفن همراه`), each cell being a Python dict describing a single advertisement. On startup the file is parsed once into per-category tables that feed both the data viewer and the search index. The ChromaDB collection is rebuilt from scratch in `.chroma_keyword_db` on every run.
+`data/final_data.csv` holds one column per category (`ماشین`, `لپ تاپ`, `تلفن همراه`), each cell being a Python dict describing a single advertisement. On startup the file is parsed once into per-category tables that feed both the data viewer and the search index. The ChromaDB collection is rebuilt from scratch in `.chroma_keyword_db` on every run.

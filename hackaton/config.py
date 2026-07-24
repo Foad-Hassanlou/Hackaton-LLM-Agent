@@ -62,7 +62,7 @@ MAX_ROUNDS = 7
 @dataclass(frozen=True)
 class Category:
     key: str          # internal identifier, also used in ChromaDB metadata
-    csv_column: str   # column name inside final_data.csv
+    csv_column: str   # column name inside data/final_data.csv
     ui_label: str     # label shown in the category combo box
 
 
