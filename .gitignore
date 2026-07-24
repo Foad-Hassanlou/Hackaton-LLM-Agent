@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+
+.env
+.venv/
+venv/
+
+# Generated at runtime
+.chroma_keyword_db/
+output.wav

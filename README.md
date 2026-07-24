@@ -18,3 +18,56 @@ This desktop application, developed with PyQt5, enables voice-driven product sea
 
   ```bash
   pip install -r requirements.txt
+  ```
+
+## Setup
+
+1. Copy the example environment file and fill in your credentials:
+
+   ```bash
+   cp _.env.example .env
+   ```
+
+   | Variable | Purpose | Default |
+   | --- | --- | --- |
+   | `METIS_API_KEY` | API key for chat + TTS. Prompted for interactively if missing. | — |
+   | `METIS_BASE_URL` | OpenAI-compatible endpoint. | — |
+   | `GPT_MODEL` | Model used by the agents. | `gpt-4o` |
+   | `TTS_MODEL` | Model used for speech synthesis. | `gpt-4o-mini-tts` |
+
+2. Run the app:
+
+   ```bash
+   python Hackaton.py
+   ```
+
+## Project Structure
+
+```
+Hackaton.py                     # launcher
+hackaton/
+  config.py                     # env vars, paths, models, category table
+  app.py                        # wires everything together and starts the GUI
+  data/catalog.py               # ProductCatalog — parses final_data.csv once
+  search/keyword_searcher.py    # plain keyword search + ChromaDB search
+  agents/
+    prompts.py                  # agent system messages
+    tools.py                    # perform_search / handle_results tools
+    team.py                     # builds the AutoGen group chat
+  audio/
+    recorder.py                 # microphone capture -> WAV
+    transcriber.py              # WAV -> Persian text
+    tts.py                      # text -> speech playback
+  ui/
+    main_window.py              # VoiceRecorder window
+    windows.py                  # graph / data table / QR code pop-ups
+    styles.py                   # Qt stylesheets
+```
+
+### How a query flows
+
+`VoiceRecorder` records audio → `transcribe_wav` turns it into Persian text → `AgentTeam.run` starts the group chat, where `search_agent` calls `perform_search`, `check_agent` decides via `handle_results` whether to widen the search (`custom_search_agent`) or rank the hits (`score_agent`) → the reply is shown in the transcript and spoken by `TTSManager`.
+
+## Data
+
+`final_data.csv` holds one column per category (`ماشین`, `لپ تاپ`, `تلفن همراه`), each cell being a Python dict describing a single advertisement. On startup the file is parsed once into per-category tables that feed both the data viewer and the search index. The ChromaDB collection is rebuilt from scratch in `.chroma_keyword_db` on every run.
